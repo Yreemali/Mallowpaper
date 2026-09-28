@@ -1,4 +1,4 @@
-# Video wallpaper for Noctalia 5.1.x
+# Mallowpaper for Noctalia 5.1.x
 
 Status: native service/UI, per-output playback, automatic power/fullscreen policies,
 and optional effective FPS/resolution copies are implemented. Five automated test

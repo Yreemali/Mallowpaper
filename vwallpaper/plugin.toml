@@ -1,9 +1,9 @@
 id = "maru/vwallpaper"
-name = "Video Wallpaper"
+name = "Mallowpaper"
 version = "0.3.1"
 plugin_api = 25
-author = "maru"
-description = "Qt video wallpapers with per-output playback and a native picker."
+author = "Maru"
+description = "Video wallpapers for Niri with a native picker, per-display controls, automatic pausing, and optional FPS and resolution limits."
 icon = "wallpaper-selector"
 tags = ["wallpaper", "video", "niri"]
 dependencies = ["python3", "ffmpeg", "vwallpaper-renderer"]

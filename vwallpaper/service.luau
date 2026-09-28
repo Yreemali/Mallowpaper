@@ -19,7 +19,7 @@ end
 
 local function report(message)
     noctalia.state.set("serviceError", message)
-    noctalia.log("Video wallpaper: " .. message)
+    noctalia.log("Mallowpaper: " .. message)
 end
 
 local function send(data)
