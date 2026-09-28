@@ -18,6 +18,15 @@ the native helpers from source.
 
 ## Overview
 
+| Identifier | Value |
+| --- | --- |
+| Plugin ID | `maru/mallowpaper` |
+| Plugin source | `mallowpaper` |
+| Bar widget | `maru/mallowpaper:wallpaper` |
+| Picker panel | `maru/mallowpaper:picker` |
+| Wayland layer namespace | `mallowpaper` |
+| Native helpers | `mallowpaper-renderer`, `mallowpaper-monitor` |
+
 The native **Wallpaper** picker handles media selection and output targeting.
 Static images use Noctalia’s renderer; videos use a dedicated Qt background surface
 on each assigned output. The bar widget provides picker access and playback controls.
@@ -107,7 +116,7 @@ failed encode preserves the existing assignment. Originals are opened for readin
 | Power monitoring | UPower and systemd-logind |
 | Build tools | CMake 3.21+, C/C++17 compilers, Ninja, pkg-config, wayland-client, wayland-scanner |
 
-The build produces `vwallpaper-renderer` and `vwallpaper-monitor`. Other
+The build produces `mallowpaper-renderer` and `mallowpaper-monitor`. Other
 compositors have not been validated; automatic fullscreen handling is Niri-specific.
 
 ## Build and install
@@ -119,13 +128,13 @@ compile or install dependencies:
 ```sh
 cmake -S . -B build -G Ninja
 cmake --build build
-noctalia msg plugins source add vwallpaper-dev path "$PWD"
-noctalia msg plugins enable maru/vwallpaper
+noctalia msg plugins source add mallowpaper path "$PWD"
+noctalia msg plugins enable maru/mallowpaper
 ```
 
 This registers a local source, so keep the repository and build directory in place.
 The plugin discovers the local renderer automatically. For a custom installation,
-set **Renderer executable** to its path and keep `vwallpaper-monitor` beside it.
+set **Renderer executable** to its path and keep `mallowpaper-monitor` beside it.
 
 If this workspace already has LayerShellQt extracted under `.deps`, configure with:
 
@@ -144,12 +153,13 @@ To show the video wallpaper in Niri’s overview, add this top-level rule to
 
 ```kdl
 layer-rule {
-    match namespace="^vwallpaper$"
+    match namespace="^mallowpaper$"
     place-within-backdrop true
 }
 ```
 
-The namespace matches this plugin’s wallpaper surface. Niri’s
+The `mallowpaper` namespace matches this plugin’s wallpaper surface. Run
+`niri msg layers` while a video is playing to verify the background layer name. Niri’s
 [`place-within-backdrop` rule](https://niri-wm.github.io/niri/Configuration%3A-Layer-Rules.html#place-within-backdrop)
 places it in the backdrop visible in overview and between workspaces.
 
@@ -157,7 +167,7 @@ places it in the backdrop visible in overview and between workspaces.
 
 1. Disable any other video-wallpaper plugin on the displays you want to use.
 2. Open **Settings → Plugins → Mallowpaper** and choose your wallpaper directory.
-3. Add **Mallowpaper** (`maru/vwallpaper:wallpaper`) in Noctalia’s bar settings.
+3. Add **Mallowpaper** (`maru/mallowpaper:wallpaper`) in Noctalia’s bar settings.
 4. Click its icon, select **All outputs** or a display, and choose an image or video.
 5. Select one display to adjust its overrides after assigning a video. Use **Restore**
    to clear its video assignment and reveal the static wallpaper.
@@ -165,8 +175,8 @@ places it in the backdrop visible in overview and between workspaces.
 You can also open settings or the picker from a terminal:
 
 ```sh
-noctalia msg settings-open-plugin maru/vwallpaper
-noctalia msg panel-toggle maru/vwallpaper:picker
+noctalia msg settings-open-plugin maru/mallowpaper
+noctalia msg panel-toggle maru/mallowpaper:picker
 ```
 
 Videos loop silently. Image selections use Noctalia’s native wallpaper renderer.
@@ -221,8 +231,8 @@ and visual artifacts still need broader validation.
 Use **Restore all** in the picker if you want to clear saved assignments, then run:
 
 ```sh
-noctalia msg plugins disable maru/vwallpaper
-noctalia msg plugins source remove vwallpaper-dev
+noctalia msg plugins disable maru/mallowpaper
+noctalia msg plugins source remove mallowpaper
 ```
 
 Disabling stops playback and restores the static surface. Saved assignments remain
@@ -243,7 +253,7 @@ Run the automated suites and manifest checks from a built checkout:
 
 ```sh
 ctest --test-dir build --output-on-failure
-noctalia plugins lint vwallpaper
+noctalia plugins lint mallowpaper
 ```
 
 See [development and validation](docs/DEVELOPMENT.md) for live tests, helper IPC,
@@ -252,7 +262,7 @@ measured behavior, and remaining release work.
 ## Repository layout
 
 ```text
-vwallpaper/    Noctalia manifest, Luau entries, Python controller, and plugin page
+mallowpaper/    Noctalia manifest, Luau entries, Python controller, and plugin page
 src/           Qt renderer and environment monitor
 qml/           Video presentation surface
 protocols/     Wayland protocol definition with upstream license notice

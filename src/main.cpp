@@ -30,8 +30,8 @@ static void emitEvent(QJsonObject event)
 int main(int argc, char **argv)
 {
     QGuiApplication app(argc, argv);
-    app.setApplicationName("vwallpaper-renderer");
-    app.setApplicationVersion("0.3.1");
+    app.setApplicationName("mallowpaper-renderer");
+    app.setApplicationVersion("0.4.0");
     QCommandLineParser args;
     args.setApplicationDescription("Qt video wallpaper proof. Commands/events are JSON lines on stdin/stdout.");
     args.addHelpOption();
@@ -88,7 +88,7 @@ int main(int argc, char **argv)
     if (!preview) {
         view.setFlags(Qt::FramelessWindowHint | Qt::WindowDoesNotAcceptFocus | Qt::WindowTransparentForInput);
         auto *layer = LayerShellQt::Window::get(&view);
-        layer->setScope("vwallpaper");
+        layer->setScope("mallowpaper");
         layer->setScreen(target);
         layer->setLayer(LayerShellQt::Window::LayerBackground);
         layer->setAnchors(LayerShellQt::Window::Anchors(LayerShellQt::Window::AnchorTop) | LayerShellQt::Window::AnchorBottom

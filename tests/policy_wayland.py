@@ -33,13 +33,13 @@ async def main():
     local_plugins = ROOT / '.deps/layer-shell-qt/usr/lib/qt6/plugins'
     if local_plugins.exists():
         os.environ['QT_PLUGIN_PATH'] = str(local_plugins)
-    with tempfile.TemporaryDirectory(prefix='vwallpaper-policy-live-') as directory:
+    with tempfile.TemporaryDirectory(prefix='mallowpaper-policy-live-') as directory:
         root = Path(directory)
         clip = root / 'clip.mp4'
         subprocess.run(['ffmpeg', '-v', 'error', '-f', 'lavfi', '-i',
                         'testsrc2=size=640x360:rate=30', '-t', '2', '-c:v',
                         'libx264', '-pix_fmt', 'yuv420p', str(clip)], check=True)
-        control = module.Controller(root / 'state', str(ROOT / 'build/vwallpaper-renderer'))
+        control = module.Controller(root / 'state', str(ROOT / 'build/mallowpaper-renderer'))
         tasks = [asyncio.create_task(coro) for coro in
                  (control.watch_niri(), control.watch_environment(), control.policy_loop())]
         preview = None

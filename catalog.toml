@@ -1,11 +1,11 @@
 [[plugin]]
-id = "maru/vwallpaper"
+id = "maru/mallowpaper"
 name = "Mallowpaper"
-version = "0.3.2"
+version = "0.4.0"
 plugin_api = 25
 author = "Maru"
 license = "MIT"
 icon = "wallpaper-selector"
 description = "Video wallpapers for Niri with a native picker, per-display controls, automatic pausing, and quality limits."
 tags = ["wallpaper", "video", "niri", "bar", "panel", "service"]
-dependencies = ["python3", "ffmpeg", "ffprobe", "env", "vwallpaper-renderer", "vwallpaper-monitor"]
+dependencies = ["python3", "ffmpeg", "ffprobe", "env", "mallowpaper-renderer", "mallowpaper-monitor"]

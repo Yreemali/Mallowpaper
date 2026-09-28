@@ -15,7 +15,7 @@ def main():
     env = dict(os.environ, QT_QPA_PLATFORM="offscreen", QSG_RHI_BACKEND="opengl",
                QT_QUICK_BACKEND="software", QT_MEDIA_BACKEND="ffmpeg",
                QT_QPA_PLATFORMTHEME="", QT_STYLE_OVERRIDE="Basic")
-    with tempfile.TemporaryDirectory(prefix="vwallpaper-test-") as directory:
+    with tempfile.TemporaryDirectory(prefix="mallowpaper-test-") as directory:
         video = Path(directory) / "video space ' $ test.mp4"
         subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i",
                         "testsrc2=size=320x180:rate=15", "-t", "1", "-c:v",

@@ -130,8 +130,8 @@ end
 
 local renderer = noctalia.getConfig("renderer_path")
 if renderer == "" then
-    renderer = noctalia.pluginDir() .. "/bin/vwallpaper-renderer"
-    if not noctalia.fileExists(renderer) then renderer = noctalia.pluginDir() .. "/../build/vwallpaper-renderer" end
+    renderer = noctalia.pluginDir() .. "/bin/mallowpaper-renderer"
+    if not noctalia.fileExists(renderer) then renderer = noctalia.pluginDir() .. "/../build/mallowpaper-renderer" end
 end
 renderer = noctalia.expandPath(renderer)
 noctalia.state.set("online", false)

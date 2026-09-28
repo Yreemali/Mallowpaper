@@ -8,7 +8,7 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("controller", ROOT / "vwallpaper/controller.py")
+spec = importlib.util.spec_from_file_location("controller", ROOT / "mallowpaper/controller.py")
 module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 
@@ -19,7 +19,7 @@ async def main():
     local_plugins = ROOT / ".deps/layer-shell-qt/usr/lib/qt6/plugins"
     if local_plugins.exists():
         os.environ["QT_PLUGIN_PATH"] = str(local_plugins)
-    with tempfile.TemporaryDirectory(prefix="vwallpaper-controller-live-") as directory:
+    with tempfile.TemporaryDirectory(prefix="mallowpaper-controller-live-") as directory:
         root = Path(directory)
         clip = root / "clip.mp4"
         bad = root / "broken.mp4"
@@ -27,7 +27,7 @@ async def main():
         subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i",
                         "testsrc2=size=640x360:rate=24", "-t", "1", "-c:v", "libx264",
                         "-pix_fmt", "yuv420p", str(clip)], check=True)
-        control = module.Controller(root / "state", str(ROOT / "build/vwallpaper-renderer"))
+        control = module.Controller(root / "state", str(ROOT / "build/mallowpaper-renderer"))
         try:
             await control.command({"action": "sync", "outputs": [output]})
             await control.command({"action": "set", "output": output, "path": str(clip)})

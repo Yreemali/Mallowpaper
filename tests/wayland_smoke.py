@@ -15,7 +15,7 @@ import time
 
 def main():
     root = Path(__file__).resolve().parents[1]
-    binary = root / "build/vwallpaper-renderer"
+    binary = root / "build/mallowpaper-renderer"
     env = dict(os.environ, QT_QPA_PLATFORM="wayland", QT_QPA_PLATFORMTHEME="")
     local_plugins = root / ".deps/layer-shell-qt/usr/lib/qt6/plugins"
     if local_plugins.exists():
@@ -24,7 +24,7 @@ def main():
                             text=True, check=True, timeout=5)
     outputs = json.loads(listed.stdout)["outputs"]
     output = sys.argv[1] if len(sys.argv) > 1 else outputs[0]["name"]
-    with tempfile.TemporaryDirectory(prefix="vwallpaper-wayland-") as directory:
+    with tempfile.TemporaryDirectory(prefix="mallowpaper-wayland-") as directory:
         video = Path(directory) / "sample.mp4"
         subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i",
                         "testsrc2=size=640x360:rate=30", "-t", "1", "-c:v",
@@ -64,7 +64,7 @@ def main():
                 receive("ready")
                 receive("status")
                 layers = json.loads(subprocess.check_output(["niri", "msg", "-j", "layers"], text=True))
-                assert any(layer["namespace"] == "vwallpaper" and layer["output"] == output
+                assert any(layer["namespace"] == "mallowpaper" and layer["output"] == output
                            and layer["layer"] == "Background"
                            and layer["keyboard_interactivity"] == "None" for layer in layers), layers
                 time.sleep(1.2)
@@ -84,7 +84,7 @@ def main():
                 process.stdin.close()
                 assert process.wait(timeout=5) == 0
                 layers = json.loads(subprocess.check_output(["niri", "msg", "-j", "layers"], text=True))
-                assert not any(layer["namespace"] == "vwallpaper" for layer in layers), layers
+                assert not any(layer["namespace"] == "mallowpaper" for layer in layers), layers
                 print(json.dumps({"result": "PASS", "output": output,
                                   "playing_frames": playing["frames"],
                                   "paused_frames": after["frames"] - before["frames"],

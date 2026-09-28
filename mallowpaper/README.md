@@ -34,7 +34,9 @@ policies add pause reasons without overriding a persisted manual pause.
 
 | Field | Value |
 | --- | --- |
-| ID | `maru/vwallpaper` |
+| ID | `maru/mallowpaper` |
+| Plugin source | `mallowpaper` |
+| Wayland layer namespace | `mallowpaper` |
 | Author | Maru |
 | Entries | Bar widget: `wallpaper`; panel: `picker`; service: `service` |
 | License | MIT |
@@ -61,7 +63,7 @@ path; cached playback copies are managed independently.
 - **LayerShellQt 6.6+** and its Wayland shell integration place videos behind windows.
 - **UPower and systemd-logind** supply battery, session, and sleep events.
 - **Niri** supplies workspace/window events and Wayland fullscreen state.
-- **`vwallpaper-renderer` and `vwallpaper-monitor`** are built from this repository.
+- **`mallowpaper-renderer` and `mallowpaper-monitor`** are built from this repository.
   The service uses `env` to launch its Python controller with the Qt environment.
 
 Build tools: CMake 3.21+, C/C++17 compilers, Ninja, pkg-config, wayland-client,
@@ -78,16 +80,14 @@ cd Mallowpaper
 cmake -S . -B build -G Ninja
 cmake --build build
 noctalia msg plugins source add mallowpaper path "$PWD"
-noctalia msg plugins enable maru/vwallpaper
+noctalia msg plugins enable maru/mallowpaper
 ```
 
 Keep this checkout and its build directory in place. The plugin discovers the
 helpers in `build/`; registering a Git source by itself does not compile them.
-If you already registered this checkout as `vwallpaper-dev`, keep that source
-instead of adding a second one.
 
 For a custom helper location, set **Renderer executable** to the absolute path of
-`vwallpaper-renderer` and keep `vwallpaper-monitor` beside it. See the
+`mallowpaper-renderer` and keep `mallowpaper-monitor` beside it. See the
 [build documentation](https://github.com/Yreemali/Mallowpaper#build-and-install)
 for the workspace-local LayerShellQt setup.
 
@@ -98,12 +98,13 @@ To show the video wallpaper in Niri’s overview, add this top-level rule to
 
 ```kdl
 layer-rule {
-    match namespace="^vwallpaper$"
+    match namespace="^mallowpaper$"
     place-within-backdrop true
 }
 ```
 
-The namespace matches this plugin’s wallpaper surface. Niri’s
+The `mallowpaper` namespace matches this plugin’s wallpaper surface. Run
+`niri msg layers` while a video is playing to verify the background layer name. Niri’s
 [`place-within-backdrop` rule](https://niri-wm.github.io/niri/Configuration%3A-Layer-Rules.html#place-within-backdrop)
 places it in the backdrop visible in overview and between workspaces.
 
@@ -127,8 +128,8 @@ Noctalia’s configurable gesture bindings can override these defaults.
 The icon is configurable and starts with the standard `wallpaper-selector` glyph.
 
 ```sh
-noctalia msg panel-toggle maru/vwallpaper:picker
-noctalia msg settings-open-plugin maru/vwallpaper
+noctalia msg panel-toggle maru/mallowpaper:picker
+noctalia msg settings-open-plugin maru/mallowpaper
 ```
 
 The picker scans one directory on open or rescan, with a 4096-file limit and
@@ -190,7 +191,7 @@ From a built source checkout:
 
 ```sh
 ctest --test-dir build --output-on-failure
-noctalia plugins lint vwallpaper
+noctalia plugins lint mallowpaper
 ```
 
 Tests cover decoding, independent pause reasons, failed replacements, persistence,
@@ -206,7 +207,7 @@ compositor versions, relevant logs, and steps to reproduce.
 Use **Restore all** first if you want to clear saved assignments, then:
 
 ```sh
-noctalia msg plugins disable maru/vwallpaper
+noctalia msg plugins disable maru/mallowpaper
 noctalia msg plugins source remove mallowpaper
 ```
 

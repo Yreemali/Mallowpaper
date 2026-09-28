@@ -56,7 +56,7 @@ def atomic_json(path, value):
 def socket_path(state_dir):
     base = Path(os.environ.get("XDG_RUNTIME_DIR", "/tmp"))
     token = hashlib.sha256(str(Path(state_dir).resolve()).encode()).hexdigest()[:16]
-    directory = base / f"vwallpaper-{os.getuid()}-{token}"
+    directory = base / f"mallowpaper-{os.getuid()}-{token}"
     directory.mkdir(mode=0o700, exist_ok=True)
     info = directory.lstat()
     if not stat.S_ISDIR(info.st_mode) or info.st_uid != os.getuid() or info.st_mode & 0o077:
@@ -509,7 +509,7 @@ class Controller:
             delay = min(delay * 2, 30)
 
     async def watch_environment(self):
-        executable = str(Path(self.renderer).resolve().with_name("vwallpaper-monitor"))
+        executable = str(Path(self.renderer).resolve().with_name("mallowpaper-monitor"))
         delay = 1
         while True:
             process = None

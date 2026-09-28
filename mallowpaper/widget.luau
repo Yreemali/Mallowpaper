@@ -3,7 +3,7 @@ function update()
     barWidget.setGlyph(noctalia.getConfig("bar_icon") or "wallpaper-selector")
     barWidget.setTooltip("Mallowpaper · click to choose, middle click to pause/resume")
 end
-function onClick() noctalia.togglePanel("maru/vwallpaper:picker") end
+function onClick() noctalia.togglePanel("maru/mallowpaper:picker") end
 function onRightClick() noctalia.openSettings() end
 function onMiddleClick()
     local output = barWidget.outputName() or "*"

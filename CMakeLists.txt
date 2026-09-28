@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(vwallpaper VERSION 0.3.1 LANGUAGES C CXX)
+project(mallowpaper VERSION 0.4.0 LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 6.8 REQUIRED COMPONENTS Core Gui Quick Multimedia DBus)
@@ -13,24 +13,24 @@ add_custom_command(OUTPUT wlr-foreign-toplevel-management-client.h wlr-foreign-t
     COMMAND ${WAYLAND_SCANNER} client-header ${TOPLEVEL_PROTOCOL} wlr-foreign-toplevel-management-client.h
     COMMAND ${WAYLAND_SCANNER} private-code ${TOPLEVEL_PROTOCOL} wlr-foreign-toplevel-management-protocol.c
     DEPENDS ${TOPLEVEL_PROTOCOL})
-qt_add_executable(vwallpaper-monitor src/monitor.cpp wlr-foreign-toplevel-management-protocol.c
+qt_add_executable(mallowpaper-monitor src/monitor.cpp wlr-foreign-toplevel-management-protocol.c
     wlr-foreign-toplevel-management-client.h)
-target_include_directories(vwallpaper-monitor PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
-target_link_libraries(vwallpaper-monitor PRIVATE Qt6::Core Qt6::DBus PkgConfig::WAYLAND)
-target_compile_options(vwallpaper-monitor PRIVATE -Wall -Wextra -Wpedantic)
-qt_add_executable(vwallpaper-renderer src/main.cpp)
-qt_add_resources(vwallpaper-renderer "qml" PREFIX "/" FILES qml/Wallpaper.qml)
-target_link_libraries(vwallpaper-renderer PRIVATE Qt6::Quick Qt6::Multimedia LayerShellQt::Interface)
-target_compile_options(vwallpaper-renderer PRIVATE -Wall -Wextra -Wpedantic)
-install(TARGETS vwallpaper-renderer vwallpaper-monitor RUNTIME DESTINATION bin)
-install(DIRECTORY vwallpaper/ DESTINATION share/noctalia/plugins/vwallpaper
+target_include_directories(mallowpaper-monitor PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+target_link_libraries(mallowpaper-monitor PRIVATE Qt6::Core Qt6::DBus PkgConfig::WAYLAND)
+target_compile_options(mallowpaper-monitor PRIVATE -Wall -Wextra -Wpedantic)
+qt_add_executable(mallowpaper-renderer src/main.cpp)
+qt_add_resources(mallowpaper-renderer "qml" PREFIX "/" FILES qml/Wallpaper.qml)
+target_link_libraries(mallowpaper-renderer PRIVATE Qt6::Quick Qt6::Multimedia LayerShellQt::Interface)
+target_compile_options(mallowpaper-renderer PRIVATE -Wall -Wextra -Wpedantic)
+install(TARGETS mallowpaper-renderer mallowpaper-monitor RUNTIME DESTINATION bin)
+install(DIRECTORY mallowpaper/ DESTINATION share/noctalia/plugins/mallowpaper
     PATTERN "__pycache__" EXCLUDE)
-install(TARGETS vwallpaper-renderer vwallpaper-monitor RUNTIME DESTINATION share/noctalia/plugins/vwallpaper/bin)
+install(TARGETS mallowpaper-renderer mallowpaper-monitor RUNTIME DESTINATION share/noctalia/plugins/mallowpaper/bin)
 include(CTest)
 if(BUILD_TESTING)
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
     add_test(NAME renderer-integration COMMAND ${Python3_EXECUTABLE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/tests/renderer_test.py $<TARGET_FILE:vwallpaper-renderer>)
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/renderer_test.py $<TARGET_FILE:mallowpaper-renderer>)
     set_tests_properties(renderer-integration PROPERTIES TIMEOUT 45)
     add_test(NAME controller-lifecycle COMMAND ${Python3_EXECUTABLE}
         ${CMAKE_CURRENT_SOURCE_DIR}/tests/controller_test.py)
@@ -42,6 +42,6 @@ if(BUILD_TESTING)
     if(LUA_EXECUTABLE)
         add_test(NAME service-handoff COMMAND ${LUA_EXECUTABLE}
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/service_test.lua
-            ${CMAKE_CURRENT_SOURCE_DIR}/vwallpaper/service.luau)
+            ${CMAKE_CURRENT_SOURCE_DIR}/mallowpaper/service.luau)
     endif()
 endif()

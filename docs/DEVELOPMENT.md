@@ -6,8 +6,8 @@ see the [README](../README.md).
 ## Run the proof
 
 ```sh
-build/vwallpaper-renderer --list-outputs
-build/vwallpaper-renderer --output eDP-1 --file /absolute/path/video.mp4 --fit fill
+build/mallowpaper-renderer --list-outputs
+build/mallowpaper-renderer --output eDP-1 --file /absolute/path/video.mp4 --fit fill
 ```
 
 Use `--preview` instead of `--output` to open an ordinary development window.
@@ -33,7 +33,7 @@ rejected. Playback resumes only when the reason set is empty.
 Events are `ready`, `status`, `error`, `output_removed`, and `stopped`, each with
 `version: 1`. Status includes playback position, delivered frame count, and
 active pause reasons. Stdout carries protocol messages; stderr carries diagnostics.
-The controller must drain both streams. EOF exits cleanly. `vwallpaper/controller.py`
+The controller must drain both streams. EOF exits cleanly. `mallowpaper/controller.py`
 provides the socket adapter for Noctalia, watches readiness/failure events, and
 closes renderer stdin during shutdown. A missing controller heartbeat restores
 Noctalia's static surface within 15 seconds. The controller exits after its output
@@ -48,7 +48,7 @@ python3 tests/wayland_smoke.py eDP-1
 python3 tests/controller_wayland.py
 # Opens and fullscreens an owned preview, then restores focus:
 python3 tests/policy_wayland.py
-noctalia plugins lint vwallpaper
+noctalia plugins lint mallowpaper
 ```
 
 The headless test exercises actual H.264 decoding, loop boundaries, overlapping
@@ -95,7 +95,7 @@ Setting the low-battery threshold to zero disables that threshold. Manual pause
 persists independently; clearing an automatic reason never clears manual pause.
 A paused startup decodes one still frame before exposing its surface.
 
-The `vwallpaper-monitor` helper subscribes to UPower, logind, and Wayland
+The `mallowpaper-monitor` helper subscribes to UPower, logind, and Wayland
 foreign-toplevel events; the controller subscribes to Niri's event stream.
 Unavailable sensors disable their automatic reason. Lock support depends on the
 locker reporting logind state. Physical lock/suspend and unplug/replug tests remain
