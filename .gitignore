@@ -1,5 +1,6 @@
 /build/
 /.deps/
+/PLAN.md
 __pycache__/
 *.py[cod]
 /.agents/

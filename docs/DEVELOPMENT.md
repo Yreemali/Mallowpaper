@@ -1,7 +1,7 @@
 # Development and validation
 
 Run commands below from the repository root. For installation and everyday usage,
-see the [README](../README.md). The [project plan](../PLAN.md) tracks the broader scope.
+see the [README](../README.md).
 
 ## Run the proof
 

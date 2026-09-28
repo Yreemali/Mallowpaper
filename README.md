@@ -176,8 +176,7 @@ noctalia plugins lint vwallpaper
 ```
 
 See [development and validation](docs/DEVELOPMENT.md) for live tests, helper IPC,
-measured behavior, and remaining release work. The [project plan](PLAN.md) records
-the intended feature scope.
+measured behavior, and remaining release work.
 
 ## License
 
