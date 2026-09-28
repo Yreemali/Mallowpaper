@@ -1,12 +1,13 @@
 id = "maru/vwallpaper"
 name = "Mallowpaper"
-version = "0.3.1"
+version = "0.3.2"
 plugin_api = 25
 author = "Maru"
-description = "Video wallpapers for Niri with a native picker, per-display controls, automatic pausing, and optional FPS and resolution limits."
+license = "MIT"
+description = "Video wallpapers for Niri with a native picker, per-display controls, automatic pausing, and quality limits."
 icon = "wallpaper-selector"
-tags = ["wallpaper", "video", "niri"]
-dependencies = ["python3", "ffmpeg", "vwallpaper-renderer"]
+tags = ["wallpaper", "video", "niri", "bar", "panel", "service"]
+dependencies = ["python3", "ffmpeg", "ffprobe", "env", "vwallpaper-renderer", "vwallpaper-monitor"]
 
 [[setting]]
 key = "bar_icon"
