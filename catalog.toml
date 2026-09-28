@@ -1,0 +1,10 @@
+[[plugin]]
+id = "maru/vwallpaper"
+name = "Video Wallpaper"
+version = "0.3.1"
+plugin_api = 25
+author = "maru"
+icon = "wallpaper-selector"
+description = "Qt video wallpapers with per-output playback and a native picker."
+tags = ["wallpaper", "video", "niri"]
+dependencies = ["python3", "ffmpeg", "vwallpaper-renderer"]

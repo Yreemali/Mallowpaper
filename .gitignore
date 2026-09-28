@@ -1,0 +1,8 @@
+/build/
+/.deps/
+__pycache__/
+*.py[cod]
+/.agents/
+/.codex/
+.env
+.env.*

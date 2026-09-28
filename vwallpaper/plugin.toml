@@ -1,0 +1,157 @@
+id = "maru/vwallpaper"
+name = "Video Wallpaper"
+version = "0.3.1"
+plugin_api = 25
+author = "maru"
+description = "Qt video wallpapers with per-output playback and a native picker."
+icon = "wallpaper-selector"
+tags = ["wallpaper", "video", "niri"]
+dependencies = ["python3", "ffmpeg", "vwallpaper-renderer"]
+
+[[setting]]
+key = "bar_icon"
+type = "glyph"
+label_key = "settings.glyph"
+default = "wallpaper-selector"
+
+[[setting]]
+key = "directory"
+type = "folder"
+label_key = "settings.directory"
+default = "~/Videos"
+
+[[setting]]
+key = "fit"
+type = "select"
+label_key = "settings.fit"
+default = "fill"
+options = [
+  { value = "fill", label_key = "fit.fill" },
+  { value = "fit", label_key = "fit.fit" },
+  { value = "stretch", label_key = "fit.stretch" },
+]
+
+[[setting]]
+key = "renderer_path"
+type = "file"
+label_key = "settings.renderer"
+description_key = "settings.renderer_description"
+default = ""
+advanced = true
+
+[[setting]]
+key = "pause_battery"
+type = "bool"
+label_key = "settings.pause_battery"
+default = false
+
+[[setting]]
+key = "low_battery"
+type = "int"
+label_key = "settings.low_battery"
+default = 20
+min = 0
+max = 100
+
+[[setting]]
+key = "pause_lock"
+type = "bool"
+label_key = "settings.pause_lock"
+default = true
+
+[[setting]]
+key = "pause_suspend"
+type = "bool"
+label_key = "settings.pause_suspend"
+default = true
+
+[[setting]]
+key = "pause_fullscreen"
+type = "bool"
+label_key = "settings.pause_fullscreen"
+description_key = "settings.fullscreen_description"
+default = true
+
+[[setting]]
+key = "fullscreen_focused"
+type = "bool"
+label_key = "settings.fullscreen_focused"
+default = false
+
+[[setting]]
+key = "optimize"
+type = "bool"
+label_key = "settings.optimize"
+description_key = "settings.optimize_description"
+default = false
+
+[[setting]]
+key = "fps"
+type = "select"
+label_key = "settings.fps"
+default = "30"
+visible_when = { key = "optimize", values = ["true"] }
+options = [
+  { value = "0", label_key = "quality.source" },
+  { value = "15", label_key = "quality.fps15" },
+  { value = "24", label_key = "quality.fps24" },
+  { value = "30", label_key = "quality.fps30" },
+  { value = "60", label_key = "quality.fps60" },
+]
+
+[[setting]]
+key = "slow_fps"
+type = "bool"
+label_key = "settings.slow_fps"
+description_key = "settings.slow_fps_description"
+default = false
+visible_when = { key = "optimize", values = ["true"] }
+
+[[setting]]
+key = "height"
+type = "select"
+label_key = "settings.height"
+default = "1080"
+visible_when = { key = "optimize", values = ["true"] }
+options = [
+  { value = "0", label_key = "quality.source" },
+  { value = "720", label_key = "quality.p720" },
+  { value = "1080", label_key = "quality.p1080" },
+  { value = "1440", label_key = "quality.p1440" },
+  { value = "2160", label_key = "quality.p2160" },
+]
+
+[[setting]]
+key = "ac_only"
+type = "bool"
+label_key = "settings.ac_only"
+default = true
+visible_when = { key = "optimize", values = ["true"] }
+
+[[setting]]
+key = "cache_mb"
+type = "int"
+label_key = "settings.cache_mb"
+default = 2048
+min = 128
+max = 16384
+visible_when = { key = "optimize", values = ["true"] }
+
+[[service]]
+id = "service"
+entry = "service.luau"
+
+[[panel]]
+id = "picker"
+entry = "panel.luau"
+width = 1000
+height = 760
+placement = "attached"
+position = "auto"
+keyboard_focus = "on_demand"
+
+[[widget]]
+id = "wallpaper"
+entry = "widget.luau"
+[widget.actions]
+middle = "none"

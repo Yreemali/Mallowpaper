@@ -1,0 +1,40 @@
+{
+  "settings": {
+    "directory": "Wallpaper directory",
+    "fit": "Default video scale",
+    "renderer": "Renderer executable",
+    "renderer_description": "Leave empty to use the bundled renderer or the development build.",
+    "glyph": "Panel button icon",
+    "pause_battery": "Pause while on battery",
+    "low_battery": "Pause below battery percentage (0 disables)",
+    "pause_lock": "Pause while locked or session is inactive",
+    "pause_suspend": "Pause for suspend",
+    "pause_fullscreen": "Pause behind fullscreen windows",
+    "fullscreen_description": "Niri compatibility mode: fullscreen flag plus the active full-size tile. Ambiguous matches keep playing.",
+    "fullscreen_focused": "Fullscreen pause only on the focused display",
+    "optimize": "Prepare lower-cost playback copies",
+    "optimize_description": "Reduce decoding work with cached FPS/resolution-limited copies. Original files remain unchanged. Preparation takes time and disk space.",
+    "fps": "Maximum playback FPS",
+    "height": "Maximum playback resolution",
+    "ac_only": "Prepare copies only on AC power",
+    "cache_mb": "Playback cache limit (MiB)",
+    "slow_fps": "Slow motion when reducing FPS",
+    "slow_fps_description": "Keep source frames and slow playback to the selected FPS instead of discarding frames. Example: 60 to 30 FPS plays at half speed. No effect with Source FPS or a cap above the source FPS. Requires a new playback copy."
+  },
+  "quality": {
+    "source": "Source",
+    "fps15": "15 FPS",
+    "fps24": "24 FPS",
+    "fps30": "30 FPS",
+    "fps60": "60 FPS",
+    "p720": "1280 × 720",
+    "p1080": "1920 × 1080",
+    "p1440": "2560 × 1440",
+    "p2160": "3840 × 2160"
+  },
+  "fit": {
+    "fill": "Fill / crop",
+    "fit": "Fit",
+    "stretch": "Stretch"
+  }
+}
